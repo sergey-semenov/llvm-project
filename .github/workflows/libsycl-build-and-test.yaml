@@ -34,9 +34,7 @@ jobs:
         run: |
           mkdir -p $GITHUB_WORKSPACE/build
           mkdir -p $GITHUB_WORKSPACE/install
-          cmake -G Ninja -S $GITHUB_WORKSPACE/llvm -B $GITHUB_WORKSPACE/build \
-            -DLLVM_ENABLE_PROJECTS="clang" \
-            -DLLVM_INSTALL_UTILS=ON \
+          cmake -G Ninja -S $GITHUB_WORKSPACE/runtimes -B $GITHUB_WORKSPACE/build \
             -DCMAKE_INSTALL_PREFIX=$GITHUB_WORKSPACE/install \
             -DLLVM_ENABLE_RUNTIMES="libsycl" \
             -DCMAKE_BUILD_TYPE=Release
