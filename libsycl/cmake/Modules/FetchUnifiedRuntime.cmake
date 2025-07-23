@@ -182,9 +182,6 @@ set(UNIFIED_RUNTIME_SRC_INCLUDE_DIR "${UNIFIED_RUNTIME_SOURCE_DIR}/source")
 set(UNIFIED_RUNTIME_COMMON_INCLUDE_DIR "${UNIFIED_RUNTIME_SOURCE_DIR}/source/common")
 
 add_library(UnifiedRuntimeLoader ALIAS ur_loader)
-add_library(UnifiedRuntimeCommon ALIAS ur_common)
-add_library(UnifiedMemoryFramework ALIAS ur_umf)
-
 add_library(UnifiedRuntime-Headers INTERFACE)
 
 target_include_directories(UnifiedRuntime-Headers
@@ -192,38 +189,10 @@ target_include_directories(UnifiedRuntime-Headers
     "${UNIFIED_RUNTIME_INCLUDE_DIR}"
 )
 
-find_package(Threads REQUIRED)
-
-if(TARGET UnifiedRuntimeLoader)
-  # Install the UR loader.
-  install(TARGETS ur_loader
-    LIBRARY DESTINATION "lib${LLVM_LIBDIR_SUFFIX}" COMPONENT unified-runtime-loader
-    ARCHIVE DESTINATION "lib${LLVM_LIBDIR_SUFFIX}" COMPONENT unified-runtime-loader
-    RUNTIME DESTINATION "bin" COMPONENT unified-runtime-loader
-  )
-endif()
-
 add_custom_target(UnifiedRuntimeAdapters)
 
 function(add_sycl_ur_adapter NAME)
   add_dependencies(UnifiedRuntimeAdapters ur_adapter_${NAME})
-
-  install(TARGETS ur_adapter_${NAME}
-    LIBRARY DESTINATION "lib${LLVM_LIBDIR_SUFFIX}" COMPONENT ur_adapter_${NAME}
-    RUNTIME DESTINATION "bin" COMPONENT ur_adapter_${NAME})
-
-  set(manifest_file
-    ${CMAKE_CURRENT_BINARY_DIR}/install_manifest_ur_adapter_${NAME}.txt)
-  add_custom_command(OUTPUT ${manifest_file}
-    COMMAND "${CMAKE_COMMAND}"
-    "-DCMAKE_INSTALL_COMPONENT=ur_adapter_${NAME}"
-    -P "${CMAKE_BINARY_DIR}/cmake_install.cmake"
-    COMMENT "Deploying component ur_adapter_${NAME}"
-    USES_TERMINAL
-  )
-  add_custom_target(install-sycl-ur-adapter-${NAME}
-    DEPENDS ${manifest_file} ur_adapter_${NAME}
-  )
 endfunction()
 
 if("level_zero" IN_LIST LIBSYCL_ENABLE_BACKENDS)
@@ -241,8 +210,3 @@ endif()
 if("opencl" IN_LIST LIBSYCL_ENABLE_BACKENDS)
   add_sycl_ur_adapter(opencl)
 endif()
-
-install(TARGETS umf
-  LIBRARY DESTINATION "lib${LLVM_LIBDIR_SUFFIX}" COMPONENT unified-memory-framework
-  ARCHIVE DESTINATION "lib${LLVM_LIBDIR_SUFFIX}" COMPONENT unified-memory-framework
-  RUNTIME DESTINATION "bin" COMPONENT unified-memory-framework)
