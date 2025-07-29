@@ -1,0 +1,200 @@
+// ktikhomi: to check: probably this is not needed
+#ifndef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC
+#define __SYCL_PARAM_TRAITS_TEMPLATE_SPEC_NEEDS_UNDEF
+#define __SYCL_PARAM_TRAITS_TEMPLATE_SPEC __SYCL_PARAM_TRAITS_SPEC
+#endif
+
+// 4.6.4.4. Information descriptors
+__SYCL_PARAM_TRAITS_SPEC(device, device_type, info::device_type,
+                        UR_DEVICE_INFO_TYPE)
+__SYCL_PARAM_TRAITS_SPEC(device, vendor_id, uint32_t,UR_DEVICE_INFO_VENDOR_ID)
+__SYCL_PARAM_TRAITS_SPEC(device, max_compute_units, uint32_t,
+                         UR_DEVICE_INFO_MAX_COMPUTE_UNITS)
+__SYCL_PARAM_TRAITS_SPEC(device, max_work_item_dimensions, uint32_t,
+                         UR_DEVICE_INFO_MAX_WORK_ITEM_DIMENSIONS)
+__SYCL_PARAM_TRAITS_TEMPLATE_SPEC(device, max_work_item_sizes<1>, range<1>,
+                                 UR_DEVICE_INFO_MAX_WORK_ITEM_SIZES)
+__SYCL_PARAM_TRAITS_TEMPLATE_SPEC(device, max_work_item_sizes<2>, range<2>,
+                                 UR_DEVICE_INFO_MAX_WORK_ITEM_SIZES)
+__SYCL_PARAM_TRAITS_TEMPLATE_SPEC(device, max_work_item_sizes<3>, range<3>,
+                                 UR_DEVICE_INFO_MAX_WORK_ITEM_SIZES)
+__SYCL_PARAM_TRAITS_SPEC(device, max_work_group_size, size_t,
+                         UR_DEVICE_INFO_MAX_WORK_GROUP_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, max_num_sub_groups, uint32_t,
+                         UR_DEVICE_INFO_MAX_NUM_SUB_GROUPS)
+__SYCL_PARAM_TRAITS_SPEC(device, sub_group_sizes, std::vector<size_t>,
+                         UR_DEVICE_INFO_SUB_GROUP_SIZES_INTEL)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_char, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_CHAR)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_short, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_SHORT)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_int, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_INT)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_long, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_LONG)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_float, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_FLOAT)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_double, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_DOUBLE)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_vector_width_half, uint32_t,
+                         UR_DEVICE_INFO_PREFERRED_VECTOR_WIDTH_HALF)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_char, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_CHAR)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_short, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_SHORT)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_int, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_INT)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_long, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_LONG)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_float, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_FLOAT)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_double, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_DOUBLE)
+__SYCL_PARAM_TRAITS_SPEC(device, native_vector_width_half, uint32_t,
+                         UR_DEVICE_INFO_NATIVE_VECTOR_WIDTH_HALF)
+__SYCL_PARAM_TRAITS_SPEC(device, max_clock_frequency, uint32_t,
+                         UR_DEVICE_INFO_MAX_CLOCK_FREQUENCY)
+__SYCL_PARAM_TRAITS_SPEC(device, address_bits, uint32_t,
+                         UR_DEVICE_INFO_ADDRESS_BITS)
+__SYCL_PARAM_TRAITS_SPEC(device, max_mem_alloc_size, uint64_t,
+                         UR_DEVICE_INFO_MAX_MEM_ALLOC_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, max_read_image_args, uint32_t,
+                         UR_DEVICE_INFO_MAX_READ_IMAGE_ARGS)
+__SYCL_PARAM_TRAITS_SPEC(device, max_write_image_args, uint32_t,
+                         UR_DEVICE_INFO_MAX_WRITE_IMAGE_ARGS)
+__SYCL_PARAM_TRAITS_SPEC(device, image2d_max_width, size_t,
+                         UR_DEVICE_INFO_IMAGE2D_MAX_WIDTH)
+__SYCL_PARAM_TRAITS_SPEC(device, image2d_max_height, size_t,
+                         UR_DEVICE_INFO_IMAGE2D_MAX_HEIGHT)
+__SYCL_PARAM_TRAITS_SPEC(device, image3d_max_width, size_t,
+                         UR_DEVICE_INFO_IMAGE3D_MAX_WIDTH)
+__SYCL_PARAM_TRAITS_SPEC(device, image3d_max_height, size_t,
+                         UR_DEVICE_INFO_IMAGE3D_MAX_HEIGHT)
+__SYCL_PARAM_TRAITS_SPEC(device, image3d_max_depth, size_t,
+                         UR_DEVICE_INFO_IMAGE3D_MAX_DEPTH)
+__SYCL_PARAM_TRAITS_SPEC(device, image_max_buffer_size, size_t,
+                         UR_DEVICE_INFO_IMAGE_MAX_BUFFER_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, max_samplers, uint32_t,
+                         UR_DEVICE_INFO_MAX_SAMPLERS)
+__SYCL_PARAM_TRAITS_SPEC(device, max_parameter_size, size_t,
+                         UR_DEVICE_INFO_MAX_PARAMETER_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, mem_base_addr_align, uint32_t,
+                         UR_DEVICE_INFO_MEM_BASE_ADDR_ALIGN)
+__SYCL_PARAM_TRAITS_SPEC(device, half_fp_config, std::vector<info::fp_config>,
+                         UR_DEVICE_INFO_HALF_FP_CONFIG)
+__SYCL_PARAM_TRAITS_SPEC(device, single_fp_config,
+                         std::vector<info::fp_config>,
+                         UR_DEVICE_INFO_SINGLE_FP_CONFIG)
+__SYCL_PARAM_TRAITS_SPEC(device, double_fp_config,
+                         std::vector<info::fp_config>,
+                         UR_DEVICE_INFO_DOUBLE_FP_CONFIG)
+__SYCL_PARAM_TRAITS_SPEC(device, global_mem_cache_type,
+                         info::global_mem_cache_type,
+                         UR_DEVICE_INFO_GLOBAL_MEM_CACHE_TYPE)
+__SYCL_PARAM_TRAITS_SPEC(device, global_mem_cache_line_size, uint32_t,
+                         UR_DEVICE_INFO_GLOBAL_MEM_CACHELINE_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, global_mem_cache_size, uint64_t,
+                         UR_DEVICE_INFO_GLOBAL_MEM_CACHE_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, global_mem_size, uint64_t,
+                         UR_DEVICE_INFO_GLOBAL_MEM_SIZE)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, max_constant_buffer_size, uint64_t,
+                         UR_DEVICE_INFO_MAX_CONSTANT_BUFFER_SIZE)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, max_constant_args, uint32_t,
+                         UR_DEVICE_INFO_MAX_CONSTANT_ARGS)
+__SYCL_PARAM_TRAITS_SPEC(device, local_mem_type, info::local_mem_type,
+                         UR_DEVICE_INFO_LOCAL_MEM_TYPE)
+__SYCL_PARAM_TRAITS_SPEC(device, local_mem_size, uint64_t,
+                         UR_DEVICE_INFO_LOCAL_MEM_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, error_correction_support, bool,
+                         UR_DEVICE_INFO_ERROR_CORRECTION_SUPPORT)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, host_unified_memory, bool,
+                         UR_DEVICE_INFO_HOST_UNIFIED_MEMORY)
+__SYCL_PARAM_TRAITS_SPEC(device, atomic_memory_order_capabilities,
+                         std::vector<sycl::memory_order>,
+                         UR_DEVICE_INFO_ATOMIC_MEMORY_ORDER_CAPABILITIES)
+__SYCL_PARAM_TRAITS_SPEC(device, atomic_fence_order_capabilities,
+                         std::vector<sycl::memory_order>,
+                         UR_DEVICE_INFO_ATOMIC_FENCE_ORDER_CAPABILITIES)
+__SYCL_PARAM_TRAITS_SPEC(device, atomic_memory_scope_capabilities,
+                         std::vector<sycl::memory_scope>,
+                         UR_DEVICE_INFO_ATOMIC_MEMORY_SCOPE_CAPABILITIES)
+__SYCL_PARAM_TRAITS_SPEC(device, atomic_fence_scope_capabilities,
+                         std::vector<sycl::memory_scope>,
+                         UR_DEVICE_INFO_ATOMIC_FENCE_SCOPE_CAPABILITIES)
+__SYCL_PARAM_TRAITS_SPEC(device, profiling_timer_resolution, size_t,
+                         UR_DEVICE_INFO_PROFILING_TIMER_RESOLUTION)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, is_endian_little, bool,
+                         UR_DEVICE_INFO_ENDIAN_LITTLE)
+__SYCL_PARAM_TRAITS_SPEC(device, is_available, bool,UR_DEVICE_INFO_AVAILABLE)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, is_compiler_available, bool,
+                         UR_DEVICE_INFO_COMPILER_AVAILABLE)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, is_linker_available, bool,
+                         UR_DEVICE_INFO_LINKER_AVAILABLE)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, execution_capabilities,
+                         std::vector<info::execution_capability>,
+                         UR_DEVICE_INFO_EXECUTION_CAPABILITIES)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, queue_profiling, bool,
+                         UR_DEVICE_INFO_QUEUE_PROPERTIES)
+// ktikhomi to take a look: TODO: UR_DEVICE_INFO_FORCE_UINT32 looks wrong here:
+__SYCL_PARAM_TRAITS_SPEC(device, built_in_kernel_ids,
+                         std::vector<sycl::kernel_id>, UR_DEVICE_INFO_FORCE_UINT32)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, built_in_kernels, std::vector<std::string>,
+                         UR_DEVICE_INFO_BUILT_IN_KERNELS)
+__SYCL_PARAM_TRAITS_SPEC(device, platform, sycl::platform,
+                         UR_DEVICE_INFO_PLATFORM)
+__SYCL_PARAM_TRAITS_SPEC(device, name, std::string,UR_DEVICE_INFO_NAME)
+__SYCL_PARAM_TRAITS_SPEC(device, vendor, std::string,UR_DEVICE_INFO_VENDOR)
+__SYCL_PARAM_TRAITS_SPEC(device, driver_version, std::string,
+                        UR_DEVICE_INFO_DRIVER_VERSION)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, profile, std::string,UR_DEVICE_INFO_PROFILE)
+__SYCL_PARAM_TRAITS_SPEC(device, version, std::string,UR_DEVICE_INFO_VERSION)
+__SYCL_PARAM_TRAITS_SPEC(device, backend_version, std::string,
+                         UR_DEVICE_INFO_BACKEND_RUNTIME_VERSION)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, extensions, std::vector<std::string>,
+                         UR_DEVICE_INFO_EXTENSIONS)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, printf_buffer_size, size_t,
+                         UR_DEVICE_INFO_PRINTF_BUFFER_SIZE)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_interop_user_sync, bool,
+                         UR_DEVICE_INFO_PREFERRED_INTEROP_USER_SYNC)
+__SYCL_PARAM_TRAITS_SPEC(device, partition_max_sub_devices, uint32_t,
+                         UR_DEVICE_INFO_PARTITION_MAX_SUB_DEVICES)
+__SYCL_PARAM_TRAITS_SPEC(device, partition_properties,
+                         std::vector<info::partition_property>,
+                         UR_DEVICE_INFO_SUPPORTED_PARTITIONS)
+__SYCL_PARAM_TRAITS_SPEC(device, partition_affinity_domains,
+                         std::vector<info::partition_affinity_domain>,
+                         UR_DEVICE_INFO_PARTITION_AFFINITY_DOMAIN)
+__SYCL_PARAM_TRAITS_SPEC(device, partition_type_property,
+                         info::partition_property,
+                         UR_DEVICE_INFO_PARTITION_TYPE)
+__SYCL_PARAM_TRAITS_SPEC(device, partition_type_affinity_domain,
+                         info::partition_affinity_domain,
+                         UR_DEVICE_INFO_PARTITION_TYPE)
+
+// Has custom specialization. 
+__SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(device, parent_device, sycl::device,
+                                     UR_DEVICE_INFO_PARENT_DEVICE)
+__SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(device, aspects,
+                                     std::vector<sycl::aspect>,
+                                     UR_DEVICE_INFO_FORCE_UINT32)
+// Deprecated by SYCL 2020
+__SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(device, image_support, bool,
+                                     UR_DEVICE_INFO_FORCE_UINT32)
+
+#ifdef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC_NEEDS_UNDEF
+#undef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC
+#undef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC_NEEDS_UNDEF
+#endif

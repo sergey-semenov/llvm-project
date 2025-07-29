@@ -1,0 +1,127 @@
+//===----------------------------------------------------------------------===//
+//
+// Part of the LLVM Project, under the Apache License v2.0 with LLVM Exceptions.
+// See https://llvm.org/LICENSE.txt for license information.
+// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+//
+//===----------------------------------------------------------------------===//
+///
+/// \file
+/// This file contains the declaration of the SYCL device_selector interface, providing a way to select a specific device or a set of devices to construct a specific object such as a device or a queue, or perform some operations on a device subset.
+///
+//===----------------------------------------------------------------------===//
+
+#ifndef _LIBSYCL___IMPL_DEVICE_SELECTOR_HPP
+#define _LIBSYCL___IMPL_DEVICE_SELECTOR_HPP
+
+// 4.6.1 Device selection class
+
+_LIBSYCL_BEGIN_NAMESPACE_SYCL
+
+// Forward declarations
+class device;
+enum class aspect;
+
+/// The SYCL 1.2.1 device_selector class provides ability to choose the
+/// best SYCL device based on heuristics specified by the user.
+///
+/// \sa device
+///
+/// \ingroup sycl_api_dev_sel
+class __SYCL_EXPORT __SYCL2020_DEPRECATED(
+    "Use SYCL 2020 callable device selectors instead.") device_selector {
+
+public:
+  virtual ~device_selector() = default;
+
+  virtual device select_device() const;
+
+  virtual int operator()(const device &Device) const = 0;
+};
+
+/// The default selector chooses the first available SYCL device.
+///
+/// \sa device
+///
+/// \ingroup sycl_api_dev_sel
+class __SYCL_EXPORT __SYCL2020_DEPRECATED(
+    "Use the callable sycl::default_selector_v instead.") default_selector
+    : public device_selector {
+public:
+  int operator()(const device &Device) const override;
+};
+
+/// Selects any SYCL GPU device.
+///
+/// \sa device
+///
+/// \ingroup sycl_api_dev_sel
+class __SYCL_EXPORT __SYCL2020_DEPRECATED(
+    "Use the callable sycl::gpu_selector_v instead.") gpu_selector
+    : public device_selector {
+public:
+  int operator()(const device &Device) const override;
+};
+
+/// Selects any SYCL CPU device.
+///
+/// \sa device
+///
+/// \ingroup sycl_api_dev_sel
+class __SYCL_EXPORT __SYCL2020_DEPRECATED(
+    "Use the callable sycl::cpu_selector_v instead.") cpu_selector
+    : public device_selector {
+public:
+  int operator()(const device &Device) const override;
+};
+
+/// Selects any SYCL accelerator device.
+///
+/// \sa device
+///
+/// \ingroup sycl_api_dev_sel
+class __SYCL_EXPORT
+__SYCL2020_DEPRECATED("Use the callable sycl::accelerator_selector_v instead.")
+    accelerator_selector : public device_selector {
+public:
+  int operator()(const device &Device) const override;
+};
+
+// -------------- SYCL 2020
+
+// SYCL 2020 standalone selectors
+__SYCL_EXPORT int default_selector_v(const device &Device);
+__SYCL_EXPORT int gpu_selector_v(const device &Device);
+__SYCL_EXPORT int cpu_selector_v(const device &Device);
+__SYCL_EXPORT int accelerator_selector_v(const device &Device);
+
+namespace detail {
+using DeviceSelectorInvocableType = std::function<int(const sycl::device &)>;
+
+template <typename... AspectListT>
+void fill_aspect_vector(std::vector<aspect> &V,  AspectListT... O) {
+  (V.emplace_back(O) , ...);
+}
+
+} // namespace detail
+
+__SYCL_EXPORT detail::DeviceSelectorInvocableType
+aspect_selector(const std::vector<aspect> &AspectList,
+                const std::vector<aspect> &DenyList = {});
+
+template <typename... AspectListT>
+detail::DeviceSelectorInvocableType aspect_selector(AspectListT... AspectList) {
+  std::vector<aspect> RequireList;
+  RequireList.reserve(sizeof...(AspectList));
+  detail::fill_aspect_vector(RequireList, AspectList...);
+  return aspect_selector(RequireList);
+}
+
+template <aspect... AspectList>
+detail::DeviceSelectorInvocableType aspect_selector() {
+  return aspect_selector({AspectList...});
+}
+
+_LIBSYCL_END_NAMESPACE_SYCL
+
+#endif // _LIBSYCL___IMPL_DEVICE_SELECTOR_HPP

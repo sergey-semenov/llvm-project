@@ -17,17 +17,23 @@
 
 #include <sycl/__impl/detail/config.hpp>
 
+#include <vector>
+#include <string>
+
 _LIBSYCL_BEGIN_NAMESPACE_SYCL
 
+class device;
+
+// 4.6.2. Platform class
 class _LIBSYCL_EXPORT platform {
 public:
   /// Constructs a platform object that is a copy of the platform which contains the device returned by default_selector_v.
   platform();
 
   /// Constructs a platform object that is a copy of the platform which contains the device that is selected by selector.
-  /// \param DeviceSelector is SYCL 2020 Device Selector, a simple callable taking a device reference and returning an integer rank.
+  /// \param DeviceSelectorInstance is SYCL 2020 Device Selector, a simple callable taking a device reference and returning an integer rank.
   template <typename DeviceSelector>
-  explicit platform(const DeviceSelector& DeviceSelector);
+  explicit platform(const DeviceSelector& DeviceSelectorInstance);
 
   /// Returns the backend associated with this platform.
   ///
@@ -49,7 +55,7 @@ public:
   /// The return type depends on information being queried.
   template <typename Param> typename Param::return_type get_info() const;
 
-  // template <typename Param>
+  template <typename Param>
   typename Param::return_type get_backend_info() const;
 
   /// Indicates if all of the SYCL devices on this platform have the
