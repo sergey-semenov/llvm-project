@@ -9,11 +9,11 @@ Unified Runtime
 
 The Unified Runtime (UR) project serves as an interface layer between the SYCL
 runtime and the device-specific runtime layers which control execution on
-devices. The parts of it primarily utilized by SYCL RT are its C API, loader
-library, and the adapter libraries that implement the API for various backends.
+devices. SYCL RT utilizes its C API, loader library, and the adapter libraries
+that implement the API for various backends.
 
 The SYCL runtime accesses the UR API via the Adapter object. Each Adapter
-object owns a ur_adapter_handle_t, which represents a UR backend (e.g. OpenCL,
+object owns a ``ur_adapter_handle_t``, which represents a UR backend (e.g. OpenCL,
 Level Zero, etc).
 
 For detailed information about the UR project including
