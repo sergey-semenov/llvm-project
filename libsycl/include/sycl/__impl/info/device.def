@@ -1,7 +1,9 @@
-// ktikhomi: to check: probably this is not needed
 #ifndef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC
-#define __SYCL_PARAM_TRAITS_TEMPLATE_SPEC_NEEDS_UNDEF
-#define __SYCL_PARAM_TRAITS_TEMPLATE_SPEC __SYCL_PARAM_TRAITS_SPEC
+static_assert(false, "__SYCL_PARAM_TRAITS_TEMPLATE_SPEC is required but not defined");
+#endif
+
+#ifndef __SYCL_PARAM_TRAITS_SPEC
+static_assert(false, "__SYCL_PARAM_TRAITS_SPEC is required but not defined");
 #endif
 
 // 4.6.4.4. Information descriptors
@@ -97,21 +99,12 @@ __SYCL_PARAM_TRAITS_SPEC(device, global_mem_cache_size, uint64_t,
                          UR_DEVICE_INFO_GLOBAL_MEM_CACHE_SIZE)
 __SYCL_PARAM_TRAITS_SPEC(device, global_mem_size, uint64_t,
                          UR_DEVICE_INFO_GLOBAL_MEM_SIZE)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, max_constant_buffer_size, uint64_t,
-                         UR_DEVICE_INFO_MAX_CONSTANT_BUFFER_SIZE)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, max_constant_args, uint32_t,
-                         UR_DEVICE_INFO_MAX_CONSTANT_ARGS)
 __SYCL_PARAM_TRAITS_SPEC(device, local_mem_type, info::local_mem_type,
                          UR_DEVICE_INFO_LOCAL_MEM_TYPE)
 __SYCL_PARAM_TRAITS_SPEC(device, local_mem_size, uint64_t,
                          UR_DEVICE_INFO_LOCAL_MEM_SIZE)
 __SYCL_PARAM_TRAITS_SPEC(device, error_correction_support, bool,
                          UR_DEVICE_INFO_ERROR_CORRECTION_SUPPORT)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, host_unified_memory, bool,
-                         UR_DEVICE_INFO_HOST_UNIFIED_MEMORY)
 __SYCL_PARAM_TRAITS_SPEC(device, atomic_memory_order_capabilities,
                          std::vector<sycl::memory_order>,
                          UR_DEVICE_INFO_ATOMIC_MEMORY_ORDER_CAPABILITIES)
@@ -126,49 +119,19 @@ __SYCL_PARAM_TRAITS_SPEC(device, atomic_fence_scope_capabilities,
                          UR_DEVICE_INFO_ATOMIC_FENCE_SCOPE_CAPABILITIES)
 __SYCL_PARAM_TRAITS_SPEC(device, profiling_timer_resolution, size_t,
                          UR_DEVICE_INFO_PROFILING_TIMER_RESOLUTION)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, is_endian_little, bool,
-                         UR_DEVICE_INFO_ENDIAN_LITTLE)
 __SYCL_PARAM_TRAITS_SPEC(device, is_available, bool,UR_DEVICE_INFO_AVAILABLE)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, is_compiler_available, bool,
-                         UR_DEVICE_INFO_COMPILER_AVAILABLE)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, is_linker_available, bool,
-                         UR_DEVICE_INFO_LINKER_AVAILABLE)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, execution_capabilities,
-                         std::vector<info::execution_capability>,
-                         UR_DEVICE_INFO_EXECUTION_CAPABILITIES)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, queue_profiling, bool,
-                         UR_DEVICE_INFO_QUEUE_PROPERTIES)
 // ktikhomi to take a look: TODO: UR_DEVICE_INFO_FORCE_UINT32 looks wrong here:
 __SYCL_PARAM_TRAITS_SPEC(device, built_in_kernel_ids,
                          std::vector<sycl::kernel_id>, UR_DEVICE_INFO_FORCE_UINT32)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, built_in_kernels, std::vector<std::string>,
-                         UR_DEVICE_INFO_BUILT_IN_KERNELS)
 __SYCL_PARAM_TRAITS_SPEC(device, platform, sycl::platform,
                          UR_DEVICE_INFO_PLATFORM)
 __SYCL_PARAM_TRAITS_SPEC(device, name, std::string,UR_DEVICE_INFO_NAME)
 __SYCL_PARAM_TRAITS_SPEC(device, vendor, std::string,UR_DEVICE_INFO_VENDOR)
 __SYCL_PARAM_TRAITS_SPEC(device, driver_version, std::string,
                         UR_DEVICE_INFO_DRIVER_VERSION)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, profile, std::string,UR_DEVICE_INFO_PROFILE)
 __SYCL_PARAM_TRAITS_SPEC(device, version, std::string,UR_DEVICE_INFO_VERSION)
 __SYCL_PARAM_TRAITS_SPEC(device, backend_version, std::string,
                          UR_DEVICE_INFO_BACKEND_RUNTIME_VERSION)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, extensions, std::vector<std::string>,
-                         UR_DEVICE_INFO_EXTENSIONS)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, printf_buffer_size, size_t,
-                         UR_DEVICE_INFO_PRINTF_BUFFER_SIZE)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC(device, preferred_interop_user_sync, bool,
-                         UR_DEVICE_INFO_PREFERRED_INTEROP_USER_SYNC)
 __SYCL_PARAM_TRAITS_SPEC(device, partition_max_sub_devices, uint32_t,
                          UR_DEVICE_INFO_PARTITION_MAX_SUB_DEVICES)
 __SYCL_PARAM_TRAITS_SPEC(device, partition_properties,
@@ -183,18 +146,9 @@ __SYCL_PARAM_TRAITS_SPEC(device, partition_type_property,
 __SYCL_PARAM_TRAITS_SPEC(device, partition_type_affinity_domain,
                          info::partition_affinity_domain,
                          UR_DEVICE_INFO_PARTITION_TYPE)
-
-// Has custom specialization. 
-__SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(device, parent_device, sycl::device,
+__SYCL_PARAM_TRAITS_SPEC(device, parent_device, sycl::device,
                                      UR_DEVICE_INFO_PARENT_DEVICE)
-__SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(device, aspects,
+__SYCL_PARAM_TRAITS_SPEC(device, aspects,
                                      std::vector<sycl::aspect>,
                                      UR_DEVICE_INFO_FORCE_UINT32)
-// Deprecated by SYCL 2020
-__SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(device, image_support, bool,
-                                     UR_DEVICE_INFO_FORCE_UINT32)
 
-#ifdef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC_NEEDS_UNDEF
-#undef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC
-#undef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC_NEEDS_UNDEF
-#endif

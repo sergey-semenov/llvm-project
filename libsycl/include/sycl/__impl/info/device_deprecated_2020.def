@@ -1,3 +1,11 @@
+#ifndef __SYCL_PARAM_TRAITS_DEPRECATED
+static_assert(false, "__SYCL_PARAM_TRAITS_DEPRECATED is required but not defined");
+#endif
+
+#ifndef __SYCL_PARAM_TRAITS_SPEC
+static_assert(false, "__SYCL_PARAM_TRAITS_SPEC is required but not defined");
+#endif
+
 __SYCL_PARAM_TRAITS_DEPRECATED(image_support, "deprecated in SYCL 2020, use device::has(aspect::ext_intel_legacy_image) to query for SYCL 1.2.1 image support")
 __SYCL_PARAM_TRAITS_DEPRECATED(max_constant_buffer_size,"deprecated in SYCL 2020")
 __SYCL_PARAM_TRAITS_DEPRECATED(max_constant_args,"deprecated in SYCL 2020")
@@ -14,3 +22,32 @@ __SYCL_PARAM_TRAITS_DEPRECATED(profile,"deprecated in SYCL 2020")
 __SYCL_PARAM_TRAITS_DEPRECATED(extensions,"deprecated in SYCL 2020, use info::device::aspects instead")
 __SYCL_PARAM_TRAITS_DEPRECATED(printf_buffer_size,"deprecated in SYCL 2020")
 __SYCL_PARAM_TRAITS_DEPRECATED(preferred_interop_user_sync,"deprecated in SYCL 2020")
+
+__SYCL_PARAM_TRAITS_SPEC(device, image_support, bool,
+                                     UR_DEVICE_INFO_FORCE_UINT32)
+__SYCL_PARAM_TRAITS_SPEC(device, profile, std::string,UR_DEVICE_INFO_PROFILE)
+__SYCL_PARAM_TRAITS_SPEC(device, built_in_kernels, std::vector<std::string>,
+                         UR_DEVICE_INFO_BUILT_IN_KERNELS)
+__SYCL_PARAM_TRAITS_SPEC(device, is_compiler_available, bool,
+                         UR_DEVICE_INFO_COMPILER_AVAILABLE)
+__SYCL_PARAM_TRAITS_SPEC(device, is_linker_available, bool,
+                         UR_DEVICE_INFO_LINKER_AVAILABLE)
+__SYCL_PARAM_TRAITS_SPEC(device, execution_capabilities,
+                         std::vector<info::execution_capability>,
+                         UR_DEVICE_INFO_EXECUTION_CAPABILITIES)
+__SYCL_PARAM_TRAITS_SPEC(device, queue_profiling, bool,
+                         UR_DEVICE_INFO_QUEUE_PROPERTIES)
+__SYCL_PARAM_TRAITS_SPEC(device, max_constant_buffer_size, uint64_t,
+                         UR_DEVICE_INFO_MAX_CONSTANT_BUFFER_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, max_constant_args, uint32_t,
+                         UR_DEVICE_INFO_MAX_CONSTANT_ARGS)
+__SYCL_PARAM_TRAITS_SPEC(device, host_unified_memory, bool,
+                         UR_DEVICE_INFO_HOST_UNIFIED_MEMORY)
+__SYCL_PARAM_TRAITS_SPEC(device, is_endian_little, bool,
+                         UR_DEVICE_INFO_ENDIAN_LITTLE)
+__SYCL_PARAM_TRAITS_SPEC(device, extensions, std::vector<std::string>,
+                         UR_DEVICE_INFO_EXTENSIONS)
+__SYCL_PARAM_TRAITS_SPEC(device, printf_buffer_size, size_t,
+                         UR_DEVICE_INFO_PRINTF_BUFFER_SIZE)
+__SYCL_PARAM_TRAITS_SPEC(device, preferred_interop_user_sync, bool,
+                         UR_DEVICE_INFO_PREFERRED_INTEROP_USER_SYNC)

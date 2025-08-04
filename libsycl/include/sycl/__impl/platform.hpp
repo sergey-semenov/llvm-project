@@ -16,6 +16,8 @@
 #define _LIBSYCL___IMPL_PLATFORM_HPP
 
 #include <sycl/__impl/detail/config.hpp>
+#include <sycl/__impl/backend.hpp>
+#include <sycl/__impl/info/device.hpp>
 
 #include <vector>
 #include <string>

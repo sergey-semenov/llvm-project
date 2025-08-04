@@ -14,18 +14,10 @@
 #ifndef _LIBSYCL___IMPL_DETAIL_MACRO_DEFINITIONS_HPP
 #define _LIBSYCL___IMPL_DETAIL_MACRO_DEFINITIONS_HPP
 
-#ifndef __SYCL_DEPRECATED
-#if !defined(SYCL2020_DISABLE_DEPRECATION_WARNINGS)
-#define __SYCL_DEPRECATED(message) [[deprecated(message)]]
-#else // SYCL_DISABLE_DEPRECATION_WARNINGS
-#define __SYCL_DEPRECATED(message)
-#endif // SYCL_DISABLE_DEPRECATION_WARNINGS
-#endif // __SYCL_DEPRECATED
-
 #ifndef __SYCL2020_DEPRECATED
 #if SYCL_LANGUAGE_VERSION == 202012L &&                                        \
     !defined(SYCL2020_DISABLE_DEPRECATION_WARNINGS)
-#define __SYCL2020_DEPRECATED(message) __SYCL_DEPRECATED(message)
+#define __SYCL2020_DEPRECATED(message) [[deprecated(message)]]
 #else
 #define __SYCL2020_DEPRECATED(message)
 #endif

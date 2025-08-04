@@ -14,6 +14,9 @@
 #ifndef _LIBSYCL___IMPL_INFO_DEVICE_HPP
 #define _LIBSYCL___IMPL_INFO_DEVICE_HPP
 
+#include <cstdint>
+#include <ur_api.h>
+
 _LIBSYCL_BEGIN_NAMESPACE_SYCL
 
 //A.3. Device information descriptors
@@ -76,29 +79,31 @@ enum class __SYCL2020_DEPRECATED("The info::execution_capability enumeration is 
   exec_native_kernel
 };
 
+// ktikhomi: to be moved to a common place
+#define __SYCL_PARAM_TRAITS_SPEC(DescType, Desc, ReturnT, UrCode)              \
+  struct Desc {                                                                \
+    using return_type = ReturnT;                                               \
+  };
+
 namespace device {
 
 // 4.6.4.4. Information descriptors
-#define __SYCL_PARAM_TRAITS_DEPRECATED(Desc, Message)                          \
-  struct __SYCL2020_DEPRECATED(Message) Desc;
-#include <sycl/info/device_deprecated_2020.def>
-#undef __SYCL_PARAM_TRAITS_DEPRECATED
-
 template <int Dimensions = 3> struct max_work_item_sizes;
 
-#define __SYCL_PARAM_TRAITS_TEMPLATE_SPEC(DescType, Desc, ReturnT, UrCode)     \
-  template <> struct Desc {                                                    \
-    using return_type = ReturnT;                                               \
-  };
-#define __SYCL_PARAM_TRAITS_SPEC_SPECIALIZED(DescType, Desc, ReturnT, UrCode)  \
-  __SYCL_PARAM_TRAITS_SPEC(DescType, Desc, ReturnT, UrCode)
+#define __SYCL_PARAM_TRAITS_DEPRECATED(Desc, Message)                        \
+  struct __SYCL2020_DEPRECATED(Message) Desc;
 
-#include <sycl/info/device.def>
+#define __SYCL_PARAM_TRAITS_TEMPLATE_SPEC(DescType, Desc, ReturnT, UrCode)   \
+template <> struct Desc {                                                    \
+  using return_type = ReturnT;                                               \
+};
 
-#undef __SYCL_PARAM_TRAITS_SPEC_SPECIALIZED
+#include <sycl/__impl/info/device_deprecated_2020.def>
+#include <sycl/__impl/info/device.def>
+
 #undef __SYCL_PARAM_TRAITS_TEMPLATE_SPEC
+#undef __SYCL_PARAM_TRAITS_DEPRECATED
 } // namespace device
-
 
 } // namespace info
 
