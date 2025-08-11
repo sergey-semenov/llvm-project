@@ -28,7 +28,7 @@ if("opencl" IN_LIST LIBSYCL_ENABLE_BACKENDS)
 endif()
 
 # Disable errors from warnings while building the UR.
-# And remember origin flags before doing that.
+# And remember the original flags before doing that.
 set(CMAKE_CXX_FLAGS_BAK "${CMAKE_CXX_FLAGS}")
 if(WIN32)
   append("/WX-" CMAKE_CXX_FLAGS)
@@ -44,7 +44,7 @@ endif()
 if(NOT FETCHCONTENT_SOURCE_DIR_UNIFIED-RUNTIME)
   find_package(unified-runtime)
   if(unified-runtime_FOUND)
-    message ("STATUS: unified-runtime is found")
+    message (STATUS "Found system install of unified-runtime")
     return()
   endif()
 endif()
@@ -71,7 +71,7 @@ set(UNIFIED_RUNTIME_SOURCE_DIR
   "${unified-runtime_SOURCE_DIR}" CACHE PATH
   "Path to Unified Runtime Headers" FORCE)
 
-set(UMF_BUILD_EXAMPLES OFF CACHE INTERNAL "EXAMPLES")
+set(UMF_BUILD_EXAMPLES OFF CACHE INTERNAL "UMF EXAMPLES")
 # Due to the use of dependentloadflag and no installer for UMF and hwloc we need
 # to link statically on windows
 if(WIN32)
