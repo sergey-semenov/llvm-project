@@ -52,7 +52,7 @@ endif()
 include(FetchContent)
 
 set(UNIFIED_RUNTIME_REPO "https://github.com/oneapi-src/unified-runtime.git")
-set(UNIFIED_RUNTIME_TAG b9f265a2ac0c967c7c8beed224351440feec162e)
+set(UNIFIED_RUNTIME_TAG 8ee4da175c197d4dc5c9ec939e7e4d87d4edfa99)
 
 FetchContent_Declare(unified-runtime
   GIT_REPOSITORY    ${UNIFIED_RUNTIME_REPO}
