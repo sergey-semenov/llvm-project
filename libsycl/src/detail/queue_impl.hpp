@@ -66,6 +66,10 @@ public:
   /// \return true if and only if the queue is in order.
   bool isInOrder() const { return MIsInorder; }
 
+  std::shared_ptr<EventImpl> memcpy(void *Dest, const void *Src,
+                                    std::size_t NumBytes,
+                                    const std::vector<event> &DepEvents);
+
   /// Waits for completion of all commands submitted to this queue.
   void wait();
 

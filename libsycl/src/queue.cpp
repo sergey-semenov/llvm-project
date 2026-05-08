@@ -33,6 +33,22 @@ device queue::get_device() const {
 
 bool queue::is_in_order() const { return impl->isInOrder(); }
 
+event queue::memcpy(void *dest, const void *src, std::size_t numBytes) {
+  return memcpy(dest, src, numBytes, std::vector<event>{});
+}
+
+event queue::memcpy(void *dest, const void *src, std::size_t numBytes,
+                    event depEvent) {
+  return memcpy(dest, src, numBytes, std::vector<event>{depEvent});
+}
+event queue::memcpy(void *dest, const void *src, std::size_t numBytes,
+                    const std::vector<event> &depEvents) {
+  std::shared_ptr<detail::EventImpl> EventImplPtr =
+      impl->memcpy(dest, src, numBytes, depEvents);
+  assert(EventImplPtr);
+  return detail::createSyclObjFromImpl<event>(EventImplPtr);
+}
+
 void queue::wait() { impl->wait(); }
 
 _LIBSYCL_END_NAMESPACE_SYCL

@@ -17,6 +17,7 @@
 
 #include <sycl/__impl/async_handler.hpp>
 #include <sycl/__impl/device.hpp>
+#include <sycl/__impl/event.hpp>
 #include <sycl/__impl/property_list.hpp>
 
 #include <sycl/__impl/detail/config.hpp>
@@ -133,6 +134,12 @@ public:
   /// The return type depends on the information being queried.
   template <typename Param>
   typename Param::return_type get_backend_info() const;
+
+  event memcpy(void *dest, const void *src, std::size_t numBytes);
+  event memcpy(void *dest, const void *src, std::size_t numBytes,
+               event depEvent);
+  event memcpy(void *dest, const void *src, std::size_t numBytes,
+               const std::vector<event> &depEvents);
 
   /// Blocks the calling thread until all commands previously submitted to this
   /// queue have completed. Synchronous errors are reported through SYCL
